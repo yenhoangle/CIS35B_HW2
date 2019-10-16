@@ -18,13 +18,15 @@ import model.Automotive;
 
 public class Driver {
     public static void main(String[] args) {
+        String textFile = "C:\\Users\\Arteh\\IdeaProjects\\CIS35B_HW1\\ffw.txt";
+        String serFile = "C:\\Users\\Arteh\\IdeaProjects\\CIS35B_HW1\\ffw.ser";
 
         FileIO fileIO = new FileIO();
-        Automotive car = fileIO.buildAutoObject("C:\\Users\\Arteh\\IdeaProjects\\CIS35B_HW1\\ffw.txt");
+        Automotive car = fileIO.buildAutoObject(textFile);
         System.out.println("Car attributes before serialization:\n");
         car.print();
-        fileIO.serialize("C:\\Users\\Arteh\\IdeaProjects\\CIS35B_HW1\\ffw.ser", car);
-        Automotive newCar = fileIO.deserialize("C:\\Users\\Arteh\\IdeaProjects\\CIS35B_HW1\\ffw.ser");
+        fileIO.serialize(serFile, car);
+        Automotive newCar = fileIO.deserialize(serFile);
         System.out.println();
         System.out.println("Car attributes after serialization and deserialization:\n");
         newCar.print();

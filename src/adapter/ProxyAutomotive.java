@@ -26,4 +26,7 @@ public abstract class ProxyAutomotive {
     }
 
     //FixAuto interface methods
+    public void fix(String filename) {
+
+    }
 }
