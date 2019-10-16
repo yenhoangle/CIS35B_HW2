@@ -3,8 +3,10 @@ package exception;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-//AutoException class uses Exception methods
+//AutoException class uses Exception methods, use FixException class to fix errors, then log error to separate file
 public class AutoException extends Exception {
     private int errNum;
     private String errMessage;
@@ -61,9 +63,13 @@ public class AutoException extends Exception {
         //TODO: CHANGE FILE NAME
         String filename = "filename";
         try {
+            //creates a timestamp
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = new Date();
+            String formattedTime = formatter.format(date);
             FileWriter fw = new FileWriter(filename);
             PrintWriter writer = new PrintWriter(fw);
-            writer.printf("\n - Error! Code %d: %s\n", errNum, errMessage);
+            writer.printf("\n - Error occurred at [ %s ] Code %d: - %s\n", formattedTime, errNum, errMessage);
             writer.close();
             fw.close();
         } catch(IOException e) {
