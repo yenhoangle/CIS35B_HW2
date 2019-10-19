@@ -32,18 +32,18 @@ public class FixException extends Exception {
 
     //fix for invalid auto name - error num: 2
     public void fix2(int errno, Automotive auto) {
-        //tell the user to fix the file for now, interface does not expose auto name setter
+
 
     }
-    //fix for missing base price - error num: 3
-    public void fix3(String errno, Automotive auto ) {
-        //tell the user to fix the file for now, interface does not expose base price setter
+    //fix for invalid base price - error num: 3
+    public void fix3(int errno, Automotive auto ) {
+        //base price cannot be missing or negative
 
     }
 
-    //fix for missing number of option sets - error num: 4
+    //fix for invalid number of option sets - error num: 4
     public void fix4(int errno, Automotive auto) {
-        //tell user to fix the file for now, numset will not be necessary with future storage structures
+        //tell
     }
 
     //fix for missing option set name - error num: 5

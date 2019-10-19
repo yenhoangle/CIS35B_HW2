@@ -10,9 +10,18 @@ import java.util.Date;
 
 //AutoException class uses Exception methods, use FixException class to fix errors, then log error to separate file
 public class AutoException extends Exception {
-    private int errNum;
+    private int errno;
     private String errMessage;
     private Automotive auto;
+
+    //messages for logging purposes
+    private static String BAD_FILE = "Invalid Filename";
+    private static String BAD_AUTO = "Invalid Auto Name";
+    private static String BAD_BASE = "Invalid Base Price";
+    private static String BAD_NUM_OPSET = "Invalid Number of Option Sets";
+    private static String BAD_OPSET = "Invalid Option Set Name";
+    private static String BAD_NUM_OP = "Invalid Number of Options";
+    private static String BAD_OP_PRICE = "Invalid Option Price";
 
     //constructors
     public AutoException() {
@@ -25,20 +34,20 @@ public class AutoException extends Exception {
     }
 
 
-    public AutoException(int errNum, Automotive auto) {
+    public AutoException(int errno, Automotive auto) {
         super();
-        this.errNum = errNum;
+        this.errno = errno;
         this.auto = auto;
     }
 
-    public AutoException(String message, int errNum) {
+    public AutoException(String message, int errno) {
         this(message);
-        this.errNum = errNum;
+        this.errno = errno;
 
     }
     //getters
-    public int getErrNum() {
-        return errNum;
+    public int getErrNo() {
+        return errno;
     }
 
     public String getErrMessage() {
@@ -47,8 +56,8 @@ public class AutoException extends Exception {
 
 
     //setters
-    public void setErrNum(int errNum) {
-        this.errNum = errNum;
+    public void setErrNo(int errno) {
+        this.errno = errno;
     }
     public void setErrMessage(String message) {
         errMessage = message;
@@ -61,6 +70,38 @@ public class AutoException extends Exception {
         //create new FixException object to access its methods
         //switch statement to apply fix based on error number
 
+        this.errno = errno;
+        FixException fixer = new FixException();
+        switch(errno) {
+            case 1:
+                errMessage = BAD_FILE;
+                fixer.fix1(errno);
+                break;
+            case 2:
+                errMessage = BAD_AUTO;
+                fixer.fix2(errno, auto);
+                break;
+            case 3:
+                errMessage = BAD_BASE;
+                fixer.fix3(errno, auto);
+                break;
+            case 4:
+                errMessage = BAD_NUM_OPSET;
+                fixer.fix4(errno, auto);
+                break;
+            case 5:
+                errMessage = BAD_OPSET;
+                fixer.fix5(errno, auto);
+                break;
+            case 6:
+                errMessage = BAD_NUM_OP;
+                fixer.fix6(errno, auto);
+                break;
+            case 7:
+                errMessage = BAD_OP_PRICE;
+                fixer.fix7(errno, auto);
+                break;
+        }
     }
 
     //logger method to write error to a file
@@ -74,7 +115,7 @@ public class AutoException extends Exception {
             String formattedTime = formatter.format(date);
             FileWriter fw = new FileWriter(filename);
             PrintWriter writer = new PrintWriter(fw);
-            writer.printf("\n - Error occurred at [ %s ] Code %d: - %s\n", formattedTime, errNum, errMessage);
+            writer.printf("\n - Error occurred at [ %s ] Code %d: - %s\n", formattedTime, errno, errMessage);
             writer.close();
             fw.close();
         } catch(IOException e) {
