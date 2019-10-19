@@ -15,12 +15,10 @@ public class AutoException extends Exception {
     private Automotive auto;
 
     //messages for logging purposes
-    private static String BAD_FILE = "Invalid Filename";
-    private static String BAD_AUTO = "Invalid Auto Name";
+    private static String BAD_FILENAME = "Invalid Filename";
+    private static String BAD_AUTO_NAME = "Invalid Auto Name";
     private static String BAD_BASE = "Invalid Base Price";
-    private static String BAD_NUM_OPSET = "Invalid Number of Option Sets";
-    private static String BAD_OPSET = "Invalid Option Set Name";
-    private static String BAD_NUM_OP = "Invalid Number of Options";
+    private static String BAD_OPSET_NAME = "Invalid Option Set Name";
     private static String BAD_OP_PRICE = "Invalid Option Price";
 
     //constructors
@@ -66,19 +64,15 @@ public class AutoException extends Exception {
 
     //for fixing the file in order to build a proper Automotive, calls helper methods
     public void fix(int errno) {
-        //TODO: implement method
-        //create new FixException object to access its methods
-        //switch statement to apply fix based on error number
-
         this.errno = errno;
         FixException fixer = new FixException();
         switch(errno) {
             case 1:
-                errMessage = BAD_FILE;
+                errMessage = BAD_FILENAME;
                 fixer.fix1(errno);
                 break;
             case 2:
-                errMessage = BAD_AUTO;
+                errMessage = BAD_AUTO_NAME;
                 fixer.fix2(errno, auto);
                 break;
             case 3:
@@ -86,20 +80,12 @@ public class AutoException extends Exception {
                 fixer.fix3(errno, auto);
                 break;
             case 4:
-                errMessage = BAD_NUM_OPSET;
+                errMessage = BAD_OPSET_NAME;
                 fixer.fix4(errno, auto);
                 break;
             case 5:
-                errMessage = BAD_OPSET;
-                fixer.fix5(errno, auto);
-                break;
-            case 6:
-                errMessage = BAD_NUM_OP;
-                fixer.fix6(errno, auto);
-                break;
-            case 7:
                 errMessage = BAD_OP_PRICE;
-                fixer.fix7(errno, auto);
+                fixer.fix5(errno, auto);
                 break;
         }
     }

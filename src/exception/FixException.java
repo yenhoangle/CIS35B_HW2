@@ -27,42 +27,82 @@ public class FixException extends Exception {
             valid = true;
             BuildAuto fixAuto = new BuildAuto();
             fixAuto.buildAuto(filename);
+            scanner.close();
         }
     }
 
     //fix for invalid auto name - error num: 2
     public void fix2(int errno, Automotive auto) {
-
-
+        boolean valid = false;
+        while(!valid) {
+            System.out.println("Please enter the full Automotive name: ");
+            Scanner scanner = new Scanner(System.in);
+            String input = scanner.nextLine().trim();
+            if (input.isEmpty() || input.equals("null") || input.equals("NULL")) {
+                continue;
+            }
+            valid = true;
+            auto.setName(input);
+            scanner.close();
+        }
     }
     //fix for invalid base price - error num: 3
     public void fix3(int errno, Automotive auto ) {
-        //base price cannot be missing or negative
-
+        boolean valid = false;
+        while(!valid) {
+            System.out.println("Please enter a valid base price for the Automotive: ");
+            Scanner scanner = new Scanner(System.in);
+            Float price = scanner.nextFloat();
+            //base price cannot be negative
+            if (price < 0) {
+                continue;
+            }
+            valid = true;
+            auto.setBasePrice(price);
+            scanner.close();
+        }
     }
 
-    //fix for invalid number of option sets - error num: 4
+    //fix for invalid option set name - error num: 4
     public void fix4(int errno, Automotive auto) {
-        //tell
+        boolean valid = false;
+        while(!valid) {
+            System.out.println("Please enter valid option set name: ");
+            Scanner scanner = new Scanner(System.in);
+            String input = scanner.nextLine().trim();
+            if (input.isEmpty() || input.equals("null") || input.equals("NULL")) {
+                continue;
+            }
+            valid = true;
+            //assuming the file has no mixed NULL and null, find first match and update name
+            auto.updateOpSetName("NULL", input);
+            auto.updateOpSetName("null", input);
+            scanner.close();
+        }
     }
 
-    //fix for missing option set name - error num: 5
+    //fix for missing option price - error num: 5
     public void fix5(int errno, Automotive auto) {
-        //tell user to fix file for now, interface does not expose opset setter
-
-
+        boolean valid = false;
+        while (!valid) {
+            System.out.println("Missing option price.");
+            System.out.println("Please enter information in the format of Option Set Name:Option Name:Price");
+            Scanner scanner = new Scanner(System.in);
+            String line = scanner.nextLine();
+            if (line.isEmpty()) {
+                continue;
+            }
+            String[] info = line.split(":");
+            String opsetName = info[0];
+            String opname = info[1];
+            Float price = Float.parseFloat(info[2]);
+            if (opsetName.isEmpty() || opsetName.equals("null") || opsetName.equals("NULL") ||
+                    opname.isEmpty() || opname.equals("null") || opname.equals("NULL")) {
+                continue;
+            }
+            valid = true;
+            auto.updateOpPrice(opsetName, opname, price);
+            scanner.close();
+        }
     }
-
-    //fix for missing number of options - error num: 6
-    public void fix6(int errno, Automotive auto) {
-        //tell the user to fix the file for now
-
-    }
-
-    //fix for missing option price - error num: 7
-    public void fix7(int errno, Automotive auto) {
-
-
-    }
-
 }

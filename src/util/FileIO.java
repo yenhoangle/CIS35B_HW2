@@ -41,6 +41,7 @@ public class FileIO {
                         String option = buffer.readLine();
                         //split option into name : price
                         String[] namePrice = option.split(":");
+                        //check if size is 2, if not 2, missing price
                         float price = Float.parseFloat(namePrice[1]);
                         auto.setOpVals(i, j, namePrice[0], price);
                     }
