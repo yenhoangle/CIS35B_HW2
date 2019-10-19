@@ -1,5 +1,7 @@
 package exception;
 
+import model.Automotive;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,6 +12,7 @@ import java.util.Date;
 public class AutoException extends Exception {
     private int errNum;
     private String errMessage;
+    private Automotive auto;
 
     //constructors
     public AutoException() {
@@ -22,9 +25,10 @@ public class AutoException extends Exception {
     }
 
 
-    public AutoException(int errNum) {
+    public AutoException(int errNum, Automotive auto) {
         super();
         this.errNum = errNum;
+        this.auto = auto;
     }
 
     public AutoException(String message, int errNum) {
@@ -49,6 +53,7 @@ public class AutoException extends Exception {
     public void setErrMessage(String message) {
         errMessage = message;
     }
+    public void setAuto(Automotive auto) {this.auto = auto; }
 
     //for fixing the file in order to build a proper Automotive, calls helper methods
     public void fix(int errno) {

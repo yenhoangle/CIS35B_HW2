@@ -1,5 +1,6 @@
 package adapter;
 
+import exception.AutoException;
 import model.Automotive;
 import util.FileIO;
 
@@ -26,7 +27,7 @@ public abstract class ProxyAutomotive {
     }
 
     //FixAuto interface methods
-    public void fix(String filename) {
-
+    public void fix(int errno) {
+        AutoException autoEx = new AutoException(errno, a1);
     }
 }

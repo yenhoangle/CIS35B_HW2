@@ -1,5 +1,7 @@
 package adapter;
 
+import model.Automotive;
+
 public interface FixAuto {
-    public void fix(String filename);
+    public void fix(int errno);
 }
