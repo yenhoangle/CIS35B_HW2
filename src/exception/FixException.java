@@ -25,8 +25,6 @@ public class FixException extends Exception {
                 continue;
             }
             valid = true;
-            BuildAuto fixAuto = new BuildAuto();
-            fixAuto.buildAuto(filename);
             scanner.close();
         }
     }
@@ -81,11 +79,11 @@ public class FixException extends Exception {
         }
     }
 
-    //fix for missing option price - error num: 5
+    //fix for invalid option name - error num: 5
     public void fix5(int errno, Automotive auto) {
         boolean valid = false;
         while (!valid) {
-            System.out.println("Missing option price.");
+            System.out.println("Invalid option name.");
             System.out.println("Please enter information in the format of Option Set Name:Option Name:Price");
             Scanner scanner = new Scanner(System.in);
             String line = scanner.nextLine();
@@ -101,7 +99,8 @@ public class FixException extends Exception {
                 continue;
             }
             valid = true;
-            auto.updateOpPrice(opsetName, opname, price);
+            auto.updateOpName(opsetName,"NULL", opname);
+            auto.updateOpName(opsetName, "null", opname);
             scanner.close();
         }
     }

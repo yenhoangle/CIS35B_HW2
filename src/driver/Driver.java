@@ -12,12 +12,13 @@
  * Sample outputs are included in a file called output.txt
  * */
 package driver;
+import exception.AutoException;
 import util.FileIO;
 import model.Automotive;
 
 
 public class Driver {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws AutoException {
         String textFile = "C:\\Users\\Arteh\\IdeaProjects\\CIS35B_HW1\\ffw.txt";
         String serFile = "C:\\Users\\Arteh\\IdeaProjects\\CIS35B_HW1\\ffw.ser";
 

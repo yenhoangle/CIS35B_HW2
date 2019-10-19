@@ -8,7 +8,7 @@ public abstract class ProxyAutomotive {
     private Automotive a1;
 
     //implements CreateAuto interface methods via subclass BuildAuto
-    public void buildAuto(String filename) {
+    public void buildAuto(String filename) throws AutoException {
         FileIO fileIO = new FileIO();
         a1 = fileIO.buildAutoObject(filename);
     }
@@ -27,7 +27,7 @@ public abstract class ProxyAutomotive {
     }
 
     //FixAuto interface methods
-    public void fix(int errno) {
+    public void fix(int errno) throws AutoException {
         AutoException autoEx = new AutoException(errno, a1);
     }
 }

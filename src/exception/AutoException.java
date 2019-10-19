@@ -19,11 +19,16 @@ public class AutoException extends Exception {
     private static String BAD_AUTO_NAME = "Invalid Auto Name";
     private static String BAD_BASE = "Invalid Base Price";
     private static String BAD_OPSET_NAME = "Invalid Option Set Name";
-    private static String BAD_OP_PRICE = "Invalid Option Price";
+    private static String BAD_OP_NAME = "Invalid Option Name";
 
     //constructors
     public AutoException() {
         super();
+    }
+
+    public AutoException(int errno) {
+        super();
+        this.errno = errno;
     }
 
     public AutoException(String message) {
@@ -66,6 +71,7 @@ public class AutoException extends Exception {
     public void fix(int errno) {
         this.errno = errno;
         FixException fixer = new FixException();
+        log();
         switch(errno) {
             case 1:
                 errMessage = BAD_FILENAME;
@@ -84,7 +90,7 @@ public class AutoException extends Exception {
                 fixer.fix4(errno, auto);
                 break;
             case 5:
-                errMessage = BAD_OP_PRICE;
+                errMessage = BAD_OP_NAME;
                 fixer.fix5(errno, auto);
                 break;
         }
@@ -92,8 +98,7 @@ public class AutoException extends Exception {
 
     //logger method to write error to a file
     public void log() {
-        //TODO: CHANGE FILE NAME
-        String filename = "filename";
+        String filename = "/textfiles/logfile";
         try {
             //creates a timestamp
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
