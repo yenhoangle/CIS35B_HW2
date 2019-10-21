@@ -30,6 +30,7 @@ public class Driver2 {
                 System.out.println("Updating car's option price");
                 a2.updateOptionPrice("Ford Focus Wagon ZTW",
                         "Transmission", "Manual", -800);
+                a1.printAuto("");
             } catch (AutoException ae) {
                 complete = false;
                 FixAuto a3 = new BuildAuto();

@@ -17,6 +17,15 @@ import model.OptionSet;
 public class FileIO {
     public Automotive buildAutoObject(String filename) throws AutoException {
         try {
+            try {
+                File testFile = new File(filename);
+                if (!testFile.exists() || testFile.length() == 0) {
+                    throw new AutoException(1);
+                }
+            } catch (AutoException ae) {
+                ae.fix(1, filename);
+
+            }
             FileReader fileReader = new FileReader(filename);
             BufferedReader buffer = new BufferedReader(fileReader);
             //creates a boolean value to keep track of end of file
@@ -24,21 +33,35 @@ public class FileIO {
             //first line has auto name, base price, and size of opset array
             String autoString = buffer.readLine();
             //file is empty
-            if (autoString == null) {
-                throw new AutoException(1);
-
+            try {
+                if (autoString.isEmpty() || autoString.equals(" ")) {
+                    throw new AutoException(1);
+                }
+            } catch (AutoException ae) {
+                ae.fix(1, filename);
             }
             String[] baseAuto = autoString.split(":");
             String autoName = baseAuto[0];
-            if (baseAuto[1].isEmpty()) {
-                throw new AutoException(3);
+            try {
+                if (baseAuto[1].isEmpty()) {
+                    throw new AutoException(3);
+                }
+            } catch (AutoException ae) {
+                ae.fix(3, baseAuto[1]);
             }
             Float basePrice = Float.parseFloat(baseAuto[1]);
             int opsetNum = Integer.parseInt(baseAuto[2]);
             Automotive auto = new Automotive(autoName, basePrice, opsetNum);
-            //throw exception if auto name is null
-            if(baseAuto.equals("NULL") || baseAuto.equals("null")) {
-                throw new AutoException(2);
+            //throw exception if auto name invalid
+            try {
+                if (baseAuto[0].equals(" ") || baseAuto[0].isEmpty()) {
+                    //TODO: TAKE OUT
+                    System.out.println("fixing autoname");
+                    throw new AutoException(2);
+                }
+            } catch (AutoException ae) {
+                ae.fix(2, autoName);
+                auto.setName(baseAuto[0]);
             }
             //throw exception if base price is negative
             if (basePrice < 0) {
@@ -61,7 +84,7 @@ public class FileIO {
                     }
                     buffer.readLine(); //skips (
                     //loop for the option array itself
-                    for(int j = 0; j < opSize; j++) {
+                    for (int j = 0; j < opSize; j++) {
                         String option = buffer.readLine();
                         //split option into name : price
                         String[] namePrice = option.split(":");
@@ -82,6 +105,8 @@ public class FileIO {
             return auto;
         } catch (FileNotFoundException fnf) {
             throw new AutoException(1);
+        } catch (NullPointerException npe) {
+            System.out.println("NPE");
         } catch (IOException e) {
             System.out.println("Error");
         }

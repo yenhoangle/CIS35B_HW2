@@ -31,23 +31,6 @@ public class AutoException extends Exception {
         this.errno = errno;
     }
 
-    public AutoException(String message) {
-        super();
-        errMessage = message;
-    }
-
-
-    public AutoException(int errno, Automotive auto) {
-        super();
-        this.errno = errno;
-        this.auto = auto;
-    }
-
-    public AutoException(String message, int errno) {
-        this(message);
-        this.errno = errno;
-
-    }
     //getters
     public int getErrNo() {
         return errno;
@@ -68,30 +51,30 @@ public class AutoException extends Exception {
     public void setAuto(Automotive auto) {this.auto = auto; }
 
     //for fixing the file in order to build a proper Automotive, calls helper methods
-    public void fix(int errno) {
+    public void fix(int errno, String fixString) {
         this.errno = errno;
         FixException fixer = new FixException();
         log();
         switch(errno) {
             case 1:
                 errMessage = BAD_FILENAME;
-                fixer.fix1(errno);
+                fixer.fix1(errno, fixString);
                 break;
             case 2:
                 errMessage = BAD_AUTO_NAME;
-                fixer.fix2(errno, auto);
+                fixer.fix2(errno, fixString);
                 break;
             case 3:
                 errMessage = BAD_BASE;
-                fixer.fix3(errno, auto);
+                fixer.fix3(errno, fixString);
                 break;
             case 4:
                 errMessage = BAD_OPSET_NAME;
-                fixer.fix4(errno, auto);
+                fixer.fix4(errno, fixString);
                 break;
             case 5:
                 errMessage = BAD_OP_NAME;
-                fixer.fix5(errno, auto);
+                fixer.fix5(errno, fixString);
                 break;
         }
     }
