@@ -91,7 +91,6 @@ public class OptionSet implements Serializable {
 
     //find methods
     protected Option findOption(String name) {
-        if (name == null) return null;
 
         for (int i = 0; i < opArr.length; i++) {
             if (opArr[i].getName().equals(name)) {
@@ -102,19 +101,16 @@ public class OptionSet implements Serializable {
     }
 
     protected int findOpIndex(String opName) {
-        if (opName == null) return -1;
         return getOpIndex(opName);
     }
 
     protected float findOpPrice(String name) {
-        if (name == null) return -1;
         for (int i = 0; i < opArr.length; i++) {
             if (opArr[i].getName().equals(name)) {
                 return opArr[i].getPrice();
             }
         }
         return -1;
-
     }
 
     //updaters
@@ -149,7 +145,7 @@ public class OptionSet implements Serializable {
 
     //print
     protected void print() {
-        System.out.printf("Option Set Name: %s \n", name);
+        System.out.printf("Option Set Name: %s\n", name);
         for(int i = 0; i < opArr.length; i++) {
             if (opArr[i] != null) {
                 opArr[i].print();

@@ -19,11 +19,15 @@ import model.Automotive;
 
 public class Driver {
     public static void main(String[] args) throws AutoException {
-        String textFile = "C:\\Users\\Arteh\\IdeaProjects\\CIS35B_HW1\\ffw.txt";
-        String serFile = "C:\\Users\\Arteh\\IdeaProjects\\CIS35B_HW1\\ffw.ser";
+        String textFile = "C:\\Users\\Arteh\\IdeaProjects\\CIS35B_HW2\\textfiles\\ffw.txt";
+        String serFile = "C:\\Users\\Arteh\\IdeaProjects\\CIS35B_HW2\\textfiles\\ffw.ser";
 
         FileIO fileIO = new FileIO();
         Automotive car = fileIO.buildAutoObject(textFile);
+        System.out.println("Attempt to update opset name");
+        car.updateOpSetName("Color", "Colour");
+        System.out.println("Attempt to update op price");
+        car.updateOpPrice("Transmission", "Manual", -800);
         System.out.println("Car attributes before serialization:\n");
         car.print();
         fileIO.serialize(serFile, car);

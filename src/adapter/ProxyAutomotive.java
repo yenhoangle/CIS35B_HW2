@@ -5,7 +5,7 @@ import model.Automotive;
 import util.FileIO;
 
 public abstract class ProxyAutomotive {
-    private Automotive a1;
+    private static Automotive a1;
 
     //implements CreateAuto interface methods via subclass BuildAuto
     public void buildAuto(String filename) throws AutoException {

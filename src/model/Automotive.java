@@ -109,11 +109,10 @@ public class Automotive implements Serializable {
     }
 
     public OptionSet findOpSet(String name) {
-        if (name == null) return null;
-
         for (int i = 0; i < opset.length; i++) {
-            if (opset[i].getName().equals(name))
+            if (opset[i].getName().equals(name)) {
                 return opset[i];
+            }
         }
         return null;
     }
@@ -125,14 +124,14 @@ public class Automotive implements Serializable {
     //update methods
     public void updateOpSet(String name, OptionSet newOpSet) {
         int updateIndex = this.findOpSetIndex(name);
-        if (updateIndex == -1) {
+        if (updateIndex != -1) {
             this.setOpSet(updateIndex, newOpSet);
         }
     }
 
     public void updateOpSetName(String name, String newName) {
         int updateIndex = this.findOpSetIndex(name);
-        if(updateIndex == -1) {
+        if(updateIndex != -1) {
             this.setOpSetName(updateIndex, newName);
         }
     }
