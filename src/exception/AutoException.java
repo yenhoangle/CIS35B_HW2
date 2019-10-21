@@ -23,11 +23,11 @@ public class AutoException extends Exception {
 
     //constructors
     public AutoException() {
-        super();
+        //super();
     }
 
     public AutoException(int errno) {
-        super();
+        //super();
         this.errno = errno;
     }
 
@@ -51,23 +51,29 @@ public class AutoException extends Exception {
     public void setAuto(Automotive auto) {this.auto = auto; }
 
     //for fixing the file in order to build a proper Automotive, calls helper methods
-    public void fix(int errno, String fixString) {
-        this.errno = errno;
+    public void fix(int errno, Automotive car) {
+        auto = car;
         FixException fixer = new FixException();
         log();
         switch(errno) {
+            /*
             case 1:
                 errMessage = BAD_FILENAME;
                 fixer.fix1(errno, fixString);
                 break;
+
+             */
             case 2:
                 errMessage = BAD_AUTO_NAME;
-                fixer.fix2(errno, fixString);
+                fixer.fix2(errno, car);
                 break;
+                /*
             case 3:
                 errMessage = BAD_BASE;
                 fixer.fix3(errno, fixString);
                 break;
+
+
             case 4:
                 errMessage = BAD_OPSET_NAME;
                 fixer.fix4(errno, fixString);
@@ -76,6 +82,8 @@ public class AutoException extends Exception {
                 errMessage = BAD_OP_NAME;
                 fixer.fix5(errno, fixString);
                 break;
+
+                 */
         }
     }
 

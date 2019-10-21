@@ -23,7 +23,7 @@ public class FileIO {
                     throw new AutoException(1);
                 }
             } catch (AutoException ae) {
-                ae.fix(1, filename);
+                //ae.fix(1, filename);
 
             }
             FileReader fileReader = new FileReader(filename);
@@ -38,7 +38,7 @@ public class FileIO {
                     throw new AutoException(1);
                 }
             } catch (AutoException ae) {
-                ae.fix(1, filename);
+                //ae.fix(1, filename);
             }
             String[] baseAuto = autoString.split(":");
             String autoName = baseAuto[0];
@@ -47,7 +47,7 @@ public class FileIO {
                     throw new AutoException(3);
                 }
             } catch (AutoException ae) {
-                ae.fix(3, baseAuto[1]);
+                //ae.fix(3, baseAuto[1]);
             }
             Float basePrice = Float.parseFloat(baseAuto[1]);
             int opsetNum = Integer.parseInt(baseAuto[2]);
@@ -55,18 +55,29 @@ public class FileIO {
             //throw exception if auto name invalid
             try {
                 if (baseAuto[0].equals(" ") || baseAuto[0].isEmpty()) {
-                    //TODO: TAKE OUT
-                    System.out.println("fixing autoname");
+                    System.out.println("throwing this");
                     throw new AutoException(2);
                 }
             } catch (AutoException ae) {
-                ae.fix(2, autoName);
-                auto.setName(baseAuto[0]);
+                //TODO: TAKE OUT
+                System.out.println("fixing autoname");
+                ae.fix(2, auto);
+                //auto.setName(baseAuto[0]);
+                //ae.log();
+                System.out.println("error logged");
+
             }
             //throw exception if base price is negative
-            if (basePrice < 0) {
-                throw new AutoException(3);
+            //TODO
+
+            try {
+                if (basePrice < 0) {
+                    throw new AutoException(3);
+                }
+            } catch (AutoException ae) {
+                ae.fix(3, auto);
             }
+
             //save the length of the array of array
             int opsetSize = auto.getOpSetArr().length;
             while (!eof) {
@@ -79,19 +90,22 @@ public class FileIO {
                     int opSize = Integer.parseInt(pair[1]);
                     //each opset entry is a newly created OptionSet object, which has an array of option : price
                     auto.setOpSet(i, new OptionSet(pair[0], opSize));
+                    /*
                     if (pair[0].equals("NULL") || pair[0].equals("null")) {
                         throw new AutoException(4);
                     }
+                     */
                     buffer.readLine(); //skips (
                     //loop for the option array itself
                     for (int j = 0; j < opSize; j++) {
                         String option = buffer.readLine();
                         //split option into name : price
                         String[] namePrice = option.split(":");
+                        //TODO
                         //throw new exception of op name is invalid
-                        if (namePrice[0].equals("NULL") || namePrice[1].equals("null")) {
+                        /*if (namePrice[0].equals("NULL") || namePrice[1].equals("null")) {
                             throw new AutoException(5);
-                        }
+                        } */
                         float price = Float.parseFloat(namePrice[1]);
                         auto.setOpVals(i, j, namePrice[0], price);
                     }
@@ -104,7 +118,7 @@ public class FileIO {
             fileReader.close();
             return auto;
         } catch (FileNotFoundException fnf) {
-            throw new AutoException(1);
+            System.out.println("FNF");
         } catch (NullPointerException npe) {
             System.out.println("NPE");
         } catch (IOException e) {

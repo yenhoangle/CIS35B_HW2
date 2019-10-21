@@ -27,7 +27,6 @@ public abstract class ProxyAutomotive {
     }
 
     //FixAuto interface methods
-    public void fix(int errno) throws AutoException {
-        AutoException autoEx = new AutoException(errno);
+    public void fix(int errno)  {
     }
 }

@@ -12,7 +12,6 @@ public class Driver2 {
     public static void main(String[] args) throws AutoException {
         boolean complete = false;
         String file = "C:\\Users\\Arteh\\IdeaProjects\\CIS35B_HW2\\textfiles\\missingData2.txt";
-            try {
                 CreateAuto a1 = new BuildAuto();
                 UpdateAuto a2 = new BuildAuto();
                 //testing out a bad file
@@ -31,10 +30,5 @@ public class Driver2 {
                 a2.updateOptionPrice("Ford Focus Wagon ZTW",
                         "Transmission", "Manual", -800);
                 a1.printAuto("");
-            } catch (AutoException ae) {
-                complete = false;
-                FixAuto a3 = new BuildAuto();
-                //a3.f
-            }
     }
 }

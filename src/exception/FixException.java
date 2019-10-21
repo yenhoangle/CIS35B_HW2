@@ -6,14 +6,15 @@ import model.Automotive;
 
 /* helper class to fix some build errors
 * fix by prompting user input */
-public class FixException extends Exception {
+public class FixException {
     String fileFolder = "/textfiles/";
     //constructor
     public FixException() {
     }
 
     //fix for missing file  - error num: 1
-    public void fix1(int errno, String file) {
+    public void fix1(int errno, Automotive auto) {
+        /*
         boolean valid = false;
         while(!valid) {
             System.out.println("File is not found or empty. Please enter a new file name: ");
@@ -27,26 +28,30 @@ public class FixException extends Exception {
             valid = true;
             file = filename;
             scanner.close();
-        }
+
+
+        } */
     }
 
     //fix for invalid auto name - error num: 2
-    public void fix2(int errno, String autoname) {
+    public void fix2(int errno, Automotive auto) {
         boolean valid = false;
         while(!valid) {
             System.out.println("Please enter the full Automotive name: ");
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine().trim();
-            if (input.isEmpty() || input.equals("null") || input.equals("NULL")) {
+            /*
+            if (input.isEmpty()) {
                 continue;
-            }
+            } */
             valid = true;
-            autoname = input;
+            //autoname = input;
+            auto.setName(input);
             scanner.close();
         }
     }
     //fix for invalid base price - error num: 3
-    public void fix3(int errno, String autoprice ) {
+    public void fix3(int errno, Automotive auto ) {
         boolean valid = false;
         while(!valid) {
             System.out.println("Please enter a valid base price for the Automotive: ");
@@ -58,7 +63,8 @@ public class FixException extends Exception {
                 continue;
             }
             valid = true;
-            autoprice = price.toString();
+            //autoprice = price.toString();
+            auto.setBasePrice(price);
             scanner.close();
         }
     }
