@@ -6,32 +6,12 @@ import model.Automotive;
 
 /* helper class to fix some build errors
 * fix by prompting user input */
-public class FixException {
+public class FixExceptions {
     String fileFolder = "/textfiles/";
     //constructor
-    public FixException() {
+    public FixExceptions() {
     }
 
-    //fix for missing file  - error num: 1
-    public void fix1(int errno, Automotive auto) {
-        /*
-        boolean valid = false;
-        while(!valid) {
-            System.out.println("File is not found or empty. Please enter a new file name: ");
-            Scanner scanner = new Scanner(System.in);
-            String input = scanner.nextLine().trim();
-            String filename = fileFolder + input;
-            File testFile = new File(filename);
-            if (input.isEmpty() || !testFile.exists()) {
-                continue;
-            }
-            valid = true;
-            file = filename;
-            scanner.close();
-
-
-        } */
-    }
 
     //fix for invalid auto name - error num: 2
     public void fix2(int errno, Automotive auto) {
@@ -63,24 +43,23 @@ public class FixException {
                 continue;
             }
             valid = true;
-            //autoprice = price.toString();
             auto.setBasePrice(price);
             scanner.close();
         }
     }
 
     //fix for invalid option set name - error num: 4
-    public void fix4(int errno, String opsetname) {
+    public void fix4(int errno, Automotive car) {
         boolean valid = false;
         while(!valid) {
             System.out.println("Please enter valid option set name: ");
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine().trim();
-            if (input.isEmpty() || input.equals("null") || input.equals("NULL")) {
+            if (input.isEmpty() || input.equals("")) {
                 continue;
             }
             valid = true;
-            opsetname = input;
+            car.setOpSetName(car.findOpSetIndex(""), input);
             scanner.close();
         }
     }

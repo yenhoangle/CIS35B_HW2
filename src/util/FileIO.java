@@ -15,7 +15,7 @@ import model.Automotive;
 import model.OptionSet;
 
 public class FileIO {
-    public Automotive buildAutoObject(String filename) throws AutoException {
+    public Automotive buildAutoObject(String filename) throws AutoException{
         try {
             try {
                 File testFile = new File(filename);
@@ -42,40 +42,27 @@ public class FileIO {
             }
             String[] baseAuto = autoString.split(":");
             String autoName = baseAuto[0];
-            try {
-                if (baseAuto[1].isEmpty()) {
-                    throw new AutoException(3);
-                }
-            } catch (AutoException ae) {
-                //ae.fix(3, baseAuto[1]);
-            }
             Float basePrice = Float.parseFloat(baseAuto[1]);
             int opsetNum = Integer.parseInt(baseAuto[2]);
             Automotive auto = new Automotive(autoName, basePrice, opsetNum);
             //throw exception if auto name invalid
+
             try {
                 if (baseAuto[0].equals(" ") || baseAuto[0].isEmpty()) {
-                    System.out.println("throwing this");
                     throw new AutoException(2);
                 }
             } catch (AutoException ae) {
-                //TODO: TAKE OUT
-                System.out.println("fixing autoname");
                 ae.fix(2, auto);
-                //auto.setName(baseAuto[0]);
-                //ae.log();
-                System.out.println("error logged");
 
             }
             //throw exception if base price is negative
-            //TODO
-
             try {
                 if (basePrice < 0) {
                     throw new AutoException(3);
                 }
             } catch (AutoException ae) {
                 ae.fix(3, auto);
+                ae.log();
             }
 
             //save the length of the array of array
@@ -90,11 +77,15 @@ public class FileIO {
                     int opSize = Integer.parseInt(pair[1]);
                     //each opset entry is a newly created OptionSet object, which has an array of option : price
                     auto.setOpSet(i, new OptionSet(pair[0], opSize));
-                    /*
-                    if (pair[0].equals("NULL") || pair[0].equals("null")) {
-                        throw new AutoException(4);
+                    //check for invalid option name
+                    try {
+                        if (pair[0].equals("") || pair[0].equals(" ")) {
+                            throw new AutoException(4);
+                        }
+                    } catch (AutoException ae) {
+                        ae.fix(4, auto);
+                        ae.log();
                     }
-                     */
                     buffer.readLine(); //skips (
                     //loop for the option array itself
                     for (int j = 0; j < opSize; j++) {
@@ -119,6 +110,7 @@ public class FileIO {
             return auto;
         } catch (FileNotFoundException fnf) {
             System.out.println("FNF");
+            throw new AutoException(1);
         } catch (NullPointerException npe) {
             System.out.println("NPE");
         } catch (IOException e) {

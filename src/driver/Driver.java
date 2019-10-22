@@ -27,7 +27,7 @@ public class Driver {
         System.out.println("Attempt to update opset name");
         car.updateOpSetName("Color", "Colour");
         System.out.println("Attempt to update op price");
-        car.updateOpPrice("Transmission", "Manual", -800);
+        car.updateOpPrice("Transmission", "Manual", 800);
         System.out.println("Car attributes before serialization:\n");
         car.print();
         fileIO.serialize(serFile, car);
