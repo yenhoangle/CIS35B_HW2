@@ -65,19 +65,20 @@ public class FixExceptions {
     }
 
     //fix for invalid option name - error num: 5
-    public void fix5(int errno, String opname) {
+    public void fix5(int errno, Automotive car) {
         boolean valid = false;
         while (!valid) {
             System.out.println("Invalid option name.");
-            System.out.println("Please enter valid option name");
+            System.out.println("Please check the file and enter the option set name:");
             Scanner scanner = new Scanner(System.in);
-            String line = scanner.nextLine();
-            if (line.isEmpty()) {
+            String optionset = scanner.nextLine();
+            if (optionset.isEmpty()) {
                 continue;
             }
-
+            System.out.println("Please enter the missing option name: ");
+            String option = scanner.nextLine();
+            car.updateOpName(optionset,"", option);
             valid = true;
-
             scanner.close();
         }
     }

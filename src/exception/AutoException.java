@@ -69,7 +69,7 @@ public class AutoException extends Exception {
                 log();
                 break;
 
-            /*
+
             case 4:
                 errMessage = BAD_OPSET_NAME;
                 fixer.fix4(errno, car);
@@ -80,9 +80,8 @@ public class AutoException extends Exception {
                 break;
 
             default:
-                errMessage = UNEXPECTED_EXCEPTION
+                errMessage = UNEXPECTED_EXCEPTION;
                 log();
-                 */
         }
     }
 
