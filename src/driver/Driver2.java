@@ -12,7 +12,7 @@ public class Driver2 {
     public static void main(String[] args) throws AutoException {
         try {
             boolean complete = false;
-            String file = "C:\\Users\\Arteh\\IdeaProjects\\CIS35B_HW2\\textfiles\\missingData2.txt";
+            String file = "";
             CreateAuto a1 = new BuildAuto();
             UpdateAuto a2 = new BuildAuto();
             //testing out a bad file

@@ -30,6 +30,8 @@ public class AutoException extends Exception {
     public AutoException(int errno) {
         //super();
         this.errno = errno;
+        //default message
+        this.errMessage = BAD_FILENAME;
     }
 
     //getters
@@ -57,18 +59,18 @@ public class AutoException extends Exception {
         FixExceptions fixer = new FixExceptions();
         log();
         switch(errno) {
+            case 1:
+                errMessage = BAD_FILENAME;
+                break;
             case 2:
                 errMessage = BAD_AUTO_NAME;
                 fixer.fix2(errno, car);
-                log();
                 break;
 
             case 3:
                 errMessage = BAD_BASE;
                 fixer.fix3(errno, car);
-                log();
                 break;
-
 
             case 4:
                 errMessage = BAD_OPSET_NAME;
@@ -93,7 +95,8 @@ public class AutoException extends Exception {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date date = new Date();
             String formattedTime = formatter.format(date);
-            FileWriter fw = new FileWriter(filename);
+            //sets file writer to append mode
+            FileWriter fw = new FileWriter(filename, true);
             PrintWriter writer = new PrintWriter(fw);
             writer.printf("\n - Error occurred at [ %s ] Code %d: - %s\n", formattedTime, errno, errMessage);
             writer.close();

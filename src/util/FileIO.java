@@ -23,8 +23,9 @@ public class FileIO {
                     throw new AutoException(1);
                 }
             } catch (AutoException ae) {
-                //ae.fix(1, filename);
-
+                ae.log();
+                System.out.println("Bad file, please check file and run the program again");
+                System.exit(0);
             }
             FileReader fileReader = new FileReader(filename);
             BufferedReader buffer = new BufferedReader(fileReader);
