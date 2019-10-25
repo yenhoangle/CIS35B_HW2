@@ -27,7 +27,6 @@ public class FixExceptions {
             valid = true;
             //autoname = input;
             auto.setName(input);
-            scanner.close();
         }
     }
     //fix for invalid base price - error num: 3
@@ -44,7 +43,6 @@ public class FixExceptions {
             }
             valid = true;
             auto.setBasePrice(price);
-            scanner.close();
         }
     }
 
@@ -60,7 +58,6 @@ public class FixExceptions {
             }
             valid = true;
             car.setOpSetName(car.findOpSetIndex(""), input);
-            scanner.close();
         }
     }
 
@@ -71,15 +68,14 @@ public class FixExceptions {
             System.out.println("Invalid option name.");
             System.out.println("Please check the file and enter the option set name:");
             Scanner scanner = new Scanner(System.in);
-            String optionset = scanner.nextLine();
+            String optionset = scanner.nextLine().trim();
             if (optionset.isEmpty()) {
                 continue;
             }
             System.out.println("Please enter the missing option name: ");
-            String option = scanner.nextLine();
+            String option = scanner.nextLine().trim();
             car.updateOpName(optionset,"", option);
             valid = true;
-            scanner.close();
         }
     }
 }

@@ -75,9 +75,9 @@ public class FileIO {
                     //split line into name : length
                     String[] pair = line.split(":");
                     int opSize = Integer.parseInt(pair[1]);
-                    //each opset entry is a newly created OptionSet object, which has an array of option : price
+                    //each opset entry is a newly created OptionSet object, which has an array of option : size
                     auto.setOpSet(i, new OptionSet(pair[0], opSize));
-                    //check for invalid option name
+                    //check for invalid option set name
                     try {
                         if (pair[0].equals("") || pair[0].equals(" ")) {
                             throw new AutoException(4);
@@ -92,11 +92,15 @@ public class FileIO {
                         String option = buffer.readLine();
                         //split option into name : price
                         String[] namePrice = option.split(":");
-                        //TODO
-                        //throw new exception of op name is invalid
-                        /*if (namePrice[0].equals("NULL") || namePrice[1].equals("null")) {
-                            throw new AutoException(5);
-                        } */
+                        try {
+
+                            if (namePrice[0].equals("")) {
+                                throw new AutoException(5);
+                            }
+                        } catch (AutoException ae) {
+                            ae.fix(5, auto);
+                            ae.log();
+                        }
                         float price = Float.parseFloat(namePrice[1]);
                         auto.setOpVals(i, j, namePrice[0], price);
                     }
