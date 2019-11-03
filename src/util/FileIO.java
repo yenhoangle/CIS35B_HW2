@@ -39,7 +39,7 @@ public class FileIO {
                     throw new AutoException(1);
                 }
             } catch (AutoException ae) {
-                //ae.fix(1, filename);
+
             }
             String[] baseAuto = autoString.split(":");
             String autoName = baseAuto[0];

@@ -26,7 +26,7 @@ public abstract class ProxyAutomotive {
         a1.updateOpPrice(opsetName, opName, newPrice);
     }
 
-    //FixAuto interface methods
+    //FixAuto
     public void fix(int errno)  {
     }
 }

@@ -50,7 +50,7 @@ public class FixExceptions {
     public void fix4(int errno, Automotive car) {
         boolean valid = false;
         while(!valid) {
-            System.out.println("Please enter valid option set name: ");
+            System.out.println("Please check file and enter the missing option set name: ");
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine().trim();
             if (input.isEmpty() || input.equals("")) {

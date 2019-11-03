@@ -24,14 +24,31 @@ public class AutoException extends Exception {
 
     //constructors
     public AutoException() {
-        //super();
+        super();
     }
 
     public AutoException(int errno) {
-        //super();
+        super();
         this.errno = errno;
-        //default message
-        this.errMessage = BAD_FILENAME;
+        switch(errno) {
+            case 1:
+                errMessage = BAD_FILENAME;
+                break;
+            case 2:
+                errMessage = BAD_AUTO_NAME;
+                break;
+            case 3:
+                errMessage = BAD_BASE;
+                break;
+            case 4:
+                errMessage = BAD_OPSET_NAME;
+                break;
+            case 5:
+                errMessage = BAD_OP_NAME;
+                break;
+            default:
+                errMessage = UNEXPECTED_EXCEPTION;
+        }
     }
 
     //getters
