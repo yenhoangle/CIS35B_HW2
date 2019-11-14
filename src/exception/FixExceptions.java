@@ -1,7 +1,5 @@
 package exception;
-import java.io.File;
 import java.util.*;
-import adapter.*;
 import model.Automotive;
 
 /* helper class to fix some build errors

@@ -28,5 +28,6 @@ public abstract class ProxyAutomotive {
 
     //FixAuto
     public void fix(int errno)  {
+        //implemented by file IO
     }
 }

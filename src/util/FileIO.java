@@ -54,6 +54,7 @@ public class FileIO {
                 }
             } catch (AutoException ae) {
                 ae.fix(2, auto);
+                ae.log();
 
             }
             //throw exception if base price is negative
