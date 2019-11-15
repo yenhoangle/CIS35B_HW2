@@ -1,3 +1,9 @@
+/*
+ * Yen Le
+ * 20123455
+ *
+ * Abstract class that implements interface methods for child class BuildAuto so that BuildAuto can remain empty
+ * */
 package adapter;
 
 import exception.AutoException;
